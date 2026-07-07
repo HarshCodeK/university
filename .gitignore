@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Java
+*.class
+*.jar
+*.war
+
+# Django
+db.sqlite3
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# ML Models (too large for git)
+model/*.model
+model/*.pb
+model/*.h5
+model/*.caffemodel
+*.h5
+*.pkl
+
+# Downloads
+expenses.dat

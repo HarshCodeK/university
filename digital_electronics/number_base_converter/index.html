@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Number Base Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Number Base Converter</h1>
+            <p class="subtitle">Convert between Binary, Decimal, Hex & Octal</p>
+        </header>
+
+        <div class="theme-toggle">
+            <button id="themeBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="numberInput">Enter Number</label>
+                <input type="text" id="numberInput" placeholder="e.g., 255 or FF or 11111111" oninput="convert()">
+            </div>
+            <div class="input-group">
+                <label for="baseSelect">Input Base</label>
+                <select id="baseSelect" onchange="convert()">
+                    <option value="auto">Auto Detect</option>
+                    <option value="2">Binary (Base-2)</option>
+                    <option value="10" selected>Decimal (Base-10)</option>
+                    <option value="16">Hex (Base-16)</option>
+                    <option value="8">Octal (Base-8)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <div class="result-card" onclick="explain('binary')">
+                <div class="result-label">Binary</div>
+                <div class="result-value" id="binaryResult">-</div>
+            </div>
+            <div class="result-card" onclick="explain('decimal')">
+                <div class="result-label">Decimal</div>
+                <div class="result-value" id="decimalResult">-</div>
+            </div>
+            <div class="result-card" onclick="explain('hex')">
+                <div class="result-label">Hexadecimal</div>
+                <div class="result-value" id="hexResult">-</div>
+            </div>
+            <div class="result-card" onclick="explain('octal')">
+                <div class="result-label">Octal</div>
+                <div class="result-value" id="octalResult">-</div>
+            </div>
+        </div>
+
+        <div class="explanation-section" id="explanationBox">
+            <h3>Step-by-Step Explanation</h3>
+            <p id="explanationText">Click any result card above to see the conversion steps.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

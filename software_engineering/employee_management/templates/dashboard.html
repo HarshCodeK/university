@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+{% if is_hr %}
+<h3>HR Dashboard - Salary Summary (This Month)</h3>
+<table class="table table-striped mt-3">
+    <thead class="table-dark">
+        <tr><th>ID</th><th>Name</th><th>Department</th><th>Total Hours</th><th>Hourly Rate</th><th>Salary</th></tr>
+    </thead>
+    <tbody>
+        {% for d in data %}
+        <tr>
+            <td>{{ d.emp.employee_id }}</td>
+            <td>{{ d.emp.user.get_full_name }}</td>
+            <td>{{ d.emp.department }}</td>
+            <td>{{ d.hours }}</td>
+            <td>₹{{ d.emp.hourly_rate }}</td>
+            <td><strong>₹{{ d.salary|floatformat:2 }}</strong></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h3>My Dashboard</h3>
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Total Working Hours (This Month)</div>
+            <div class="card-body"><h1>{{ hours }}</h1></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">Expected Salary</div>
+            <div class="card-body"><h1>₹{{ salary|floatformat:2 }}</h1></div>
+        </div>
+    </div>
+</div>
+<h4 class="mt-4">My Attendance Records</h4>
+<table class="table table-striped mt-2">
+    <thead class="table-dark">
+        <tr><th>Date</th><th>Sign In</th><th>Sign Out</th><th>Hours</th></tr>
+    </thead>
+    <tbody>
+        {% for a in atts %}
+        <tr>
+            <td>{{ a.date }}</td>
+            <td>{{ a.sign_in|time:"H:i:s" }}</td>
+            <td>{{ a.sign_out|time:"H:i:s"|default:"-" }}</td>
+            <td>{{ a.total_hours|default:"-" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

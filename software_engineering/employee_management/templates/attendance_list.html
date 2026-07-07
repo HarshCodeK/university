@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Attendance{% endblock %}
+{% block content %}
+<h3>Attendance</h3>
+<div class="mb-3">
+    {% if not today_att or today_att.sign_out %}
+        <a href="{% url 'sign_in' %}" class="btn btn-success">Sign In</a>
+    {% else %}
+        <a href="{% url 'sign_out' %}" class="btn btn-danger">Sign Out</a>
+        <span class="ms-3 text-muted">Signed in at {{ today_att.sign_in|time:"H:i:s" }}</span>
+    {% endif %}
+</div>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            {% if emp.role == 'HR' %}<th>Employee</th>{% endif %}
+            <th>Date</th><th>Sign In</th><th>Sign Out</th><th>Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in records %}
+        <tr>
+            {% if emp.role == 'HR' %}<td>{{ r.employee.employee_id }} - {{ r.employee.user.get_full_name }}</td>{% endif %}
+            <td>{{ r.date }}</td>
+            <td>{{ r.sign_in|time:"H:i:s" }}</td>
+            <td>{{ r.sign_out|time:"H:i:s"|default:"-" }}</td>
+            <td>{{ r.total_hours|default:"-" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
